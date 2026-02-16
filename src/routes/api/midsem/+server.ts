@@ -96,7 +96,9 @@ function parseExamTimetable(worksheet: XLSX.WorkSheet): Exam[] {
 
     const columns: ColumnInfo[] = [];
 
-    for (let col = 0; col < datesRow.length; col++) {
+    // Loop over timesRow length since dates row may be shorter (sparse)
+    const maxCol = Math.max(datesRow.length, timesRow.length);
+    for (let col = 0; col < maxCol; col++) {
         const dateVal = datesRow[col];
         const timeVal = timesRow[col];
 
