@@ -841,6 +841,9 @@
 					{/if}
 					<button type="submit" class="btn primary">Load</button>
 				</form>
+				<div class="batch-form-footer">
+					<a href="/midsem" class="btn secondary">📝 Mid-Sem Exams</a>
+				</div>
 			</div>
 		</div>
 	{:else}
@@ -1022,6 +1025,11 @@
 						</span>
 						Export Calendar
 					</button>
+					<a
+						href="/midsem"
+						class="btn secondary"
+						title="View Mid-Sem Exam Schedule">Mid-Sem Exams</a
+					>
 					<button
 						class="btn secondary"
 						onclick={() => (showUWEList = true)}
@@ -1917,6 +1925,13 @@
 	.batch-form .input {
 		text-align: center;
 		text-transform: uppercase;
+	}
+
+	.batch-form-footer {
+		margin-top: 1.5rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid #222;
+		text-align: center;
 	}
 
 	.batch-input-wrap {

@@ -118,3 +118,12 @@ export function timesOverlap(start1: string, end1: string, start2: string, end2:
     const e2 = timeToMinutes(end2);
     return s1 < e2 && s2 < e1;
 }
+
+// Exam type for mid-sem/end-sem exams
+export interface Exam {
+    courseCode: string;
+    date: string;       // e.g. "Feb 16"
+    day: string;        // e.g. "Monday"
+    time: string;       // e.g. "9:30 AM" or "3:00 PM"
+    slot: 'morning' | 'afternoon';
+}
