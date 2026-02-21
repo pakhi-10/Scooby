@@ -67,7 +67,8 @@
 		}
 
 		try {
-			const response = await fetch("/api/midsem");
+			// Add timestamp to prevent caching
+			const response = await fetch(`/api/midsem?t=21022026}`);
 			const data = await response.json();
 
 			if (data.error) {
