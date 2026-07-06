@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Seo from "$lib/components/Seo.svelte";
+
 	type IconName = "calendar" | "exam" | "clubs" | "plus";
 
 	type Feature = {
@@ -68,13 +70,11 @@
 	</svg>
 {/snippet}
 
-<svelte:head>
-	<title>Scooby · Your one-stop university app</title>
-	<meta
-		name="description"
-		content="Scooby - a one-stop university app. Check UWE/CCC timetable clashes, build your mid-sem exam schedule, and more."
-	/>
-</svelte:head>
+<Seo
+	title="Scooby"
+	description="Scooby is a one-stop university app — check UWE/CCC timetable clashes, view your exam schedule, browse campus clubs, and more."
+	image="default"
+/>
 
 <main class="home">
 	<header class="hero">

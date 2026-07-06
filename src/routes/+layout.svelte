@@ -4,11 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>Scooby</title>
-	<meta
-		name="description"
-		content="Scooby - Enter your batch to visualize your timetable, add UWE or electives to check for conflicts, export as image or to your calendar app. Features include conflict detection, search & filter, and keyboard shortcuts."
-	/>
+	<meta name="theme-color" content="#000000" />
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link
 		rel="preconnect"

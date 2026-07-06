@@ -1,17 +1,16 @@
 <script lang="ts">
 	import ExamTimetable from "$lib/components/ExamTimetable.svelte";
+	import Seo from "$lib/components/Seo.svelte";
 
 	// Flip to true when a mid-sem / end-sem exam schedule is live.
 	const examActive = false;
 </script>
 
-<svelte:head>
-	<title>Scooby · Exam Timetable</title>
-	<meta
-		name="description"
-		content="Search your courses and build your personal mid-sem or end-sem exam schedule. Export it as an image or to your calendar."
-	/>
-</svelte:head>
+<Seo
+	title="Exam Timetable"
+	description="Search your courses and build your personal mid-sem or end-sem exam schedule. Export it as an image or to your calendar."
+	image="exam"
+/>
 
 {#if examActive}
 	<ExamTimetable />
