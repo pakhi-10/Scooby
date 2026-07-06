@@ -843,7 +843,7 @@
 				</form>
 				<div class="batch-form-footer">
 					<a href="/" class="btn secondary">← Home</a>
-					<a href="/midsem" class="btn secondary">📝 Exam Timetable</a>
+					<a href="/exam" class="btn secondary">📝 Exam Timetable</a>
 				</div>
 			</div>
 		</div>
@@ -1029,7 +1029,7 @@
 						Export Calendar
 					</button>
 					<a
-						href="/midsem"
+						href="/exam"
 						class="btn secondary"
 						title="View Exam Timetable">Exam Timetable</a
 					>

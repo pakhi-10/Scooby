@@ -18,7 +18,23 @@
 {:else}
 	<main class="empty">
 		<div class="empty-inner">
-			<span class="empty-icon" aria-hidden="true">📝</span>
+			<span class="empty-badge" aria-hidden="true">
+				<svg
+					class="empty-icon"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="1.5"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				>
+					<path
+						d="M6 4a1 1 0 0 1 1-1h6l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4z"
+					/>
+					<path d="M13 3v5h5" />
+					<path d="M9 13l1.75 1.75L14 11.5" />
+				</svg>
+			</span>
 			<h1>Exam Timetable</h1>
 			<p class="empty-msg">
 				There is no Mid/End Sem exam currently going on.
@@ -42,9 +58,21 @@
 		max-width: 420px;
 	}
 
+	.empty-badge {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 56px;
+		height: 56px;
+		border: 1px solid var(--border);
+		border-radius: 14px;
+		background: var(--bg-input);
+		color: var(--text);
+	}
+
 	.empty-icon {
-		font-size: 2.5rem;
-		line-height: 1;
+		width: 26px;
+		height: 26px;
 	}
 
 	.empty-inner h1 {

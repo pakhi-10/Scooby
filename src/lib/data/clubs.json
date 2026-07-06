@@ -1,0 +1,533 @@
+[
+	{
+		"name": "Cultural Committee",
+		"details": "The Cultural Committee is the central hub for all cultural activities on campus, fostering a vibrant and inclusive environment. It supports and guides non-academic clubs and societies focused on cultural pursuits. This committee acts as an umbrella organization, providing resources and ensuring all clubs adhere to the university's guidelines. Beyond supporting individual clubs, the Cultural Committee also organises large-scale events that celebrate and showcase the diversity on campus. These events include but are not limited to the Club Fair, Fresher's Night, Three-Day Fest, Club Championship, etc.",
+		"instagram": "https://www.instagram.com/culturalcommittee.snu",
+		"handle": "@culturalcommittee.snu",
+		"email": "cultural.committee@snu.edu.in",
+		"logo": "/club-logos/cultural/cultural-committee.png",
+		"category": "cultural"
+	},
+	{
+		"name": "Adventure Club",
+		"details": "The Adventure Club aims to test out deep waters and give you an adrenaline rush as you look into the horizon from a mountain peak or paraglide through the sky. The club plans and executes end semester trips and makes adventure approachable!",
+		"instagram": "https://www.instagram.com/adventureclubsnu",
+		"handle": "@adventureclubsnu",
+		"email": "adventureclub@snu.edu.in",
+		"logo": "/club-logos/cultural/adventure-club.jpg",
+		"category": "cultural"
+	},
+	{
+		"name": "Amateur Radio Club",
+		"details": "ARC, The Amateur Radio club, aims to provide a platform for the exchange of dialogue and to facilitate accessibility and dissemination of information. The club conducts various programs and activities to advance the general interest and welfare of Shiv Nadar community.",
+		"instagram": "https://www.instagram.com/arc.snioe",
+		"handle": "@arc.snioe",
+		"email": "arc@snu.edu.in",
+		"logo": "/club-logos/cultural/amateur-radio-club.jpg",
+		"category": "cultural"
+	},
+	{
+		"name": "Around the World",
+		"details": "Around The World is the culture and language club of Shiv Nadar University. It tries to expose people to various cultures and languages from India and around the globe. The primary aim is to make one adaptable to understand and live in any conditions. The club does multiple friendly games and events to support this process. The club aims to make a friendly space in campus for people of various backgrounds to mingle with each other. The club stands for what Bear Grylls once said, \"imporivise, adapt and overcome.\"",
+		"instagram": "https://www.instagram.com/aroundtheworld_snu",
+		"handle": "@aroundtheworld_snu",
+		"email": "aroundthe.world@snu.edu.in",
+		"logo": "/club-logos/cultural/around-the-world.jpg",
+		"category": "cultural"
+	},
+	{
+		"name": "Aura",
+		"details": "AURA is a non-profit initiative that is trying to play a more significant role in society and its progress. With the primary goal of teaching underprivileged students and providing more wholesome learning experiences from grades 3-8, AURA is a team of motivated volunteers who wish to do good for society, resonating with the club's ideal of \"go, engross, give\".",
+		"instagram": "https://www.instagram.com/aurasnu",
+		"handle": "@aurasnu",
+		"email": "aura@snu.edu.in",
+		"logo": "/club-logos/cultural/aura.png",
+		"category": "cultural"
+	},
+	{
+		"name": "Campus Caravan",
+		"details": "Campus Caravan is the newspaper club of Shiv Nadar Institute of Eminence. It not only covers national and international news but also has opinion pieces on current events-both inside and outside of SNIoE. It aims to be a voice of the student community and spark stimulating conversations among them.",
+		"instagram": "https://www.instagram.com/campuscaravan",
+		"handle": "@campuscaravan",
+		"email": "campuscaravan@snu.edu.in",
+		"logo": "/club-logos/cultural/campus-caravan.png",
+		"category": "cultural"
+	},
+	{
+		"name": "CineU",
+		"details": "CineU is the film making society of SNIoE, established with the objective to appreciate the art of film. It strives to upkeep that aim by igniting discussions and organising events such as critiques, talks, discussions and quizzes to goad audiences' imagination and inspiration.",
+		"instagram": "https://www.instagram.com/cineyou",
+		"handle": "@cineyou",
+		"email": "cineu@snu.edu.in",
+		"logo": "/club-logos/cultural/cineu.jpg",
+		"category": "cultural"
+	},
+	{
+		"name": "Debating Society",
+		"details": "The Debating Society is a club dedicated to fostering critical thinking, public speaking, and argumentation skills among students. It organises a range of activities, including regular debate sessions, workshops, and competitions. The society also hosts intercollegiate debates and participates in national and international debate tournaments, providing members with opportunities to compete and collaborate with peers from other institutions.",
+		"instagram": "https://www.instagram.com/debsoc.snu",
+		"handle": "@debsoc.snu",
+		"email": "debating.society@snu.edu.in",
+		"logo": "/club-logos/cultural/debating-society.png",
+		"category": "cultural"
+	},
+	{
+		"name": "Enchant",
+		"details": "Welcome to Enchant, the lifestyle and fashion society of Shiv Nadar Institute of Eminence! Since our inception in 2018, we've thrived as a dynamic club at the forefront of celebrating individuality, creativity, and contemporary trends. More than just a club, we're a vibrant community of fashion enthusiasts united by our belief in the transformative power of style and the art of self- expression. Join us in exploring the boundless possibilities of fashion and forging meaningful connections within our community.",
+		"instagram": "https://www.instagram.com/enchant.snioe.fashion",
+		"handle": "@enchant.snioe.fashion",
+		"email": "enchant.fashion@snu.edu.in",
+		"logo": "/club-logos/cultural/enchant.jpg",
+		"category": "cultural"
+	},
+	{
+		"name": "FACTion",
+		"details": "FACTion is the Quizzing Society which is all things quizzing! From weekly internal quizzes to robust external participation, it aims to introduce and elevate the members’ experience of making question sets, hosting, and buzzing answers across diverse themes and formats.",
+		"instagram": "https://www.instagram.com/faction_snu",
+		"handle": "@faction_snu",
+		"email": "faction@snu.edu.in",
+		"logo": "/club-logos/cultural/faction.png",
+		"category": "cultural"
+	},
+	{
+		"name": "Feeding India",
+		"details": "Feeding India is a dedicated club that regularly organises drives to address the needs of helpers around the college campus. The club also extends its efforts to visit NGOs, providing essential support to the underprivileged. Their mission is to combat hunger and ensure food security for all, reflecting a strong commitment to social responsibility and community service. “Nourishing Lives, One Meal at a Time.”",
+		"instagram": "https://www.instagram.com/feeding.india.snioe",
+		"handle": "@feeding.india.snioe",
+		"email": "feedingindia@snu.edu.in",
+		"logo": "/club-logos/cultural/feeding-india.jpg",
+		"category": "cultural"
+	},
+	{
+		"name": "Girl Up Shiv Nadar University",
+		"details": "The Girl Up initiative is a campaign of the United Nations Foundation. Girl Up SNIoE aims to channel the energy and enthusiasm of students to promote global, institutional and mutual respect for all genders by creating an impact locally. While doing so, we strive to be the voice of any person whose agency is taken away and we hope to create a safe, healthy and productive space. This is done through the pillars of Challenges, Advocacy, Storytelling and Fundraising.",
+		"instagram": "https://www.instagram.com/girlup.snioe",
+		"handle": "@girlup.snioe",
+		"email": "girlup@snu.edu.in",
+		"logo": "/club-logos/cultural/girl-up-shiv-nadar-university.jpg",
+		"category": "cultural"
+	},
+	{
+		"name": "Go Green",
+		"details": "Go Green, the Environment and Sustainability Club of SNIoE, inspires individuals from diverse fields to engage in sustainability and conservation efforts. By raising awareness and organising impactful events, the club fosters eco-consciousness and grassroots movements for a greener future. Go Green's mission is to create a cleaner, greener society through widespread awareness and individual action.",
+		"instagram": "https://www.instagram.com/gogreensnu",
+		"handle": "@gogreensnu",
+		"email": "gogreen@snu.edu.in",
+		"logo": "/club-logos/cultural/go-green.png",
+		"category": "cultural"
+	},
+	{
+		"name": "Imprints",
+		"details": "Imprints, the Dramatics Society of Shiv Nadar University aims to provide all the theatre lovers and nukkad enthusiasts an opportunity to learn more about this beautiful art and to improve as an individual.",
+		"instagram": "https://www.instagram.com/imprints_snioe",
+		"handle": "@imprints_snioe",
+		"email": "dramaticssociety@snu.edu.in",
+		"logo": "/club-logos/cultural/imprints.jpg",
+		"category": "cultural"
+	},
+	{
+		"name": "Inferno",
+		"details": "Love to dance? Inferno's got you covered! The dance club of SNU consists of two talented crews: Inaayat (Classical dance) & Hustle (Western dance). Join us for workshops (Student Mentorship Programs), participate in our annual competitions 'Groove' & 'Mudra', or blaze the stage at our University fests! Whether a beginner or trained, Inferno welcomes anyone who is passionate about dancing!",
+		"instagram": "https://www.instagram.com/inferno.snu",
+		"handle": "@inferno.snu",
+		"email": "inferno@snu.edu.in",
+		"logo": "/club-logos/cultural/inferno.png",
+		"category": "cultural"
+	},
+	{
+		"name": "Inspiria",
+		"details": "Inspiria is the business society of SNIoE, which offers a dynamic environment for like-minded individuals to hone their professional skills and build strong networks. Through workshops, competitions, and lectures by corporate leaders, the society equips members with valuable skills and industry knowledge. Ultimately, the aim is to foster future leaders that go business and beyond. Inspiri's flagship event, the Business Conclave, hosts industry experts and fosters networking skills and business acumen.",
+		"instagram": "https://www.instagram.com/inspiria_snu",
+		"handle": "@inspiria_snu",
+		"email": "inspiria.scs@snu.edu.in",
+		"logo": "/club-logos/cultural/inspiria.png",
+		"category": "cultural"
+	},
+	{
+		"name": "Kalakriti",
+		"details": "Kalakriti, the Creative Club of Shiv Nadar University, is a vibrant community where like-minded individuals connect and explore their creative passions. It supports students in exploring various art forms, including painting, sculpture, sketching and digital media. It’s primary purpose is to help members stay in touch with their creative side, collaborate on inspiring works, and foster a supportive, innovative environment.",
+		"instagram": "https://www.instagram.com/kalakriti_snioe",
+		"handle": "@kalakriti_snioe",
+		"email": "kalakriti@snu.edu.in",
+		"logo": "/club-logos/cultural/kalakriti.jpg",
+		"category": "cultural"
+	},
+	{
+		"name": "Metanoia",
+		"details": "Metanoia is the mental health club of Shiv Nadar University, dedicated to creating a supportive and inclusive environment for all students. Our mission is to offer a safe space where individuals can freely express themselves and find relief from the stresses of campus life. Through various activities and initiatives, we strive to promote mental well-being and foster a sense of community and understanding.",
+		"instagram": "https://www.instagram.com/metanoia_snu",
+		"handle": "@metanoia_snu",
+		"email": "metanoia.happyclub@snu.edu.in",
+		"logo": "/club-logos/cultural/metanoia.png",
+		"category": "cultural"
+	},
+	{
+		"name": "Mythiya",
+		"details": "Mythiya is a rising cultural society at Shiv Nadar University centered around mythology, urban legends, and folklore. We aim to generate interest in the various forms of these narratives, inherited from our ancestors as stories or legends. Our society explores the diverse facets of our own past, as well as those of different cultures, to discover the similarities in human beliefs across time. We also delve into phenomena that cannot be readily explained by science but may find an explanation in the supernatural.",
+		"instagram": "https://www.instagram.com/mythiyasnioe",
+		"handle": "@mythiyasnioe",
+		"email": "mithiya@snu.edu.in",
+		"logo": "/club-logos/cultural/mythiya.jpg",
+		"category": "cultural"
+	},
+	{
+		"name": "Nexus",
+		"details": "Nexus, the gaming club of Shiv Nadar University, thrives on its unique tagline, \"By Gamers, For Non-Gamers.\" This ethos ensures that our community is welcoming and inclusive, encouraging participation from all students, regardless of their gaming background. We host a range of activities, from casual game nights to competitive tournaments, providing a platform for everyone to enjoy and explore the gaming world. Nexus is the perfect place to connect, learn, and have fun, making it a cornerstone of student life at SNU.",
+		"instagram": "https://www.instagram.com/nexus_snu",
+		"handle": "@nexus_snu",
+		"email": "nexus@snu.edu.in",
+		"logo": "/club-logos/cultural/nexus.png",
+		"category": "cultural"
+	},
+	{
+		"name": "Pixels",
+		"details": "Pixels, photography and club of SNIoE, serves as a hub for photography enthusiasts, allowing enthusiasts across all skill levels to bond over a shared passion for photography.",
+		"instagram": "https://www.instagram.com/pixels_snu",
+		"handle": "@pixels_snu",
+		"email": "pixels@snu.edu.in",
+		"logo": "/club-logos/cultural/pixels.jpg",
+		"category": "cultural"
+	},
+	{
+		"name": "Sigree",
+		"details": "Sigree is a forum for food and cooking enthusiasts. We believe nothing can get people together better than food. We experiment, create and share our love for food with the SNU community.",
+		"instagram": "https://www.instagram.com/sigree.snioe",
+		"handle": "@sigree.snioe",
+		"email": "Culinaryclub@snu.edu.in",
+		"logo": "/club-logos/cultural/sigree.jpg",
+		"category": "cultural"
+	},
+	{
+		"name": "SNU MUN Society",
+		"details": "Shiv Nadar University's MUN society focuses on competing in multiple MUNs across the NCR MUN circuit and aims to organise inter and intra-MUNs. The entire team is determined to achieve these goals and has attended over 250 conferences, winning and receiving cash prizes in most of them.",
+		"instagram": "https://www.instagram.com/snu_munsoc",
+		"handle": "@snu_munsoc",
+		"email": "munsoc@snu.edu.in",
+		"logo": "/club-logos/cultural/snu-mun-society.jpg",
+		"category": "cultural"
+	},
+	{
+		"name": "SNU Queer Collective",
+		"details": "SNU Queer Collective is dedicated to forming a safe space for Queer students and allies of the Queer community on campus. The collective's main goal is to allow Queer students to express themselves freely and sensitize people to the issues and struggles of the Queer community. It strives to be both a platform to educate people and also a way to let anyone who identifies as Queer to find other people with similar ideologies and experiences.",
+		"instagram": "https://www.instagram.com/snuqc",
+		"handle": "@snuqc",
+		"email": "snuqc@snu.edu.in",
+		"logo": "/club-logos/cultural/snu-queer-collective.jpg",
+		"category": "cultural"
+	},
+	{
+		"name": "Snuphoria",
+		"details": "Snuphoria, the Music Society of Shiv Nadar University, showcases the institution's finest musical talent at various events and competitions. Dedicated to the art of music, Snuphoria also hosts and performs at numerous campus events. Featuring members skilled in diverse instruments and vocal styles, the club continually welcomes fresh talent, through annual auditions.",
+		"instagram": "https://www.instagram.com/snuphoria",
+		"handle": "@snuphoria",
+		"email": "snuphoria@snu.edu.in",
+		"logo": "/club-logos/cultural/snuphoria.png",
+		"category": "cultural"
+	},
+	{
+		"name": "SPIC MACAY - SNU CHAPTER",
+		"details": "The SPICMACAY (Society for the Promotion of Indian Classical Music And Culture Amongst Youth) Chapter is a vibrant community dedicated to spreading awareness and appreciation for Indian classical music and culture.Through a series of engaging events, performances, and workshops, we strive to connect students with the rich heritage and traditions of India. Our chapter serves as a platform for cultural exchange, learning, and celebration, fostering a deep sense of connection and understanding among the youth.",
+		"instagram": "https://www.instagram.com/spicmacay_snioe",
+		"handle": "@spicmacay_snioe",
+		"email": "spicmacay@snu.edu.in",
+		"logo": "/club-logos/cultural/spic-macay-snu-chapter.jpg",
+		"category": "cultural"
+	},
+	{
+		"name": "Stimulus",
+		"details": "When news affects discourse, it needs to be discussed. Stimulus, Shiv Nadar University's discussion society, aims to provide a space for conducive discussion and deliberation on thought-provoking subjects, where every voice is heard without bias. There is no winner or loser, just your opinion.",
+		"instagram": "https://www.instagram.com/stimulus_snu",
+		"handle": "@stimulus_snu",
+		"email": "stimulus@snu.edu.in",
+		"logo": "/club-logos/cultural/stimulus.jpg",
+		"category": "cultural"
+	},
+	{
+		"name": "TEDx Club",
+		"details": "TEDx is an active community committed to the exchange and proliferation of valuable ideas. Through events like Qissa, Come Connect, Time Capsule, and the highly- anticipated annual TEDxShivNadarIoE Conference, we bring together minds and hearts of impassioned individuals, those with stories to share and ideas to inspire. Our club includes over 50 dedicated students, each bringing unique skills to organize logistics, curate speakers, and create engaging experiences. Join us to celebrate curiosity, growth, and the transformative power of ideas.",
+		"instagram": "https://www.instagram.com/tedxshivnadaruniversity",
+		"handle": "@tedxshivnadaruniversity",
+		"email": "tedx.club@snu.edu.in",
+		"logo": "/club-logos/cultural/tedx-club.jpg",
+		"category": "cultural"
+	},
+	{
+		"name": "The Active Dreams",
+		"details": "The Active Dreams, a nonprofit chapter at SNU, is dedicated to raising menstrual hygiene awareness and generating employment opportunities for women in rural India. Through its growth and efforts, TAD is fostering a positive influence in our community by challenging taboos and educating individuals. It offers a platform for individuals to make a significant difference in society.",
+		"instagram": "https://www.instagram.com/theactivedreams_snioe",
+		"handle": "@theactivedreams_snioe",
+		"email": "theactive.dreams@snu.edu.in",
+		"logo": "/club-logos/cultural/the-active-dreams.png",
+		"category": "cultural"
+	},
+	{
+		"name": "Words.Ink",
+		"details": "Words.Ink, the literary and spoken arts society at SNIoE, was established to provide a safe space for individuals across the university with an interest in various forms of literary art.  Words.Ink organizes a variety of interactive events, including book sales, trivia nights and writing room sessions. The society is committed to promoting a comprehensive understanding of literature that extends beyond the written word, fostering an inclusive environment where individuals from all backgrounds can freely discuss their interests across different mediums of expression.",
+		"instagram": "https://www.instagram.com/words.ink_snu",
+		"handle": "@words.ink_snu",
+		"email": "words.ink@snu.edu.in",
+		"logo": "/club-logos/cultural/words-ink.png",
+		"category": "cultural"
+	},
+	{
+		"name": "WULA",
+		"details": "Wula, the Comedy club of SNIoE, focuses on different aspects of Comedy, including, Stand-up, Improv, Sketches and Memes, Working towards bettering both comedians, and the people who work behind the stage to make the event happen. The club focuses on its members, who aspirie to be comedians, and helps integrate different styles of writing to form a cohesive set.",
+		"instagram": "https://www.instagram.com/wula_snu",
+		"handle": "@wula_snu",
+		"email": "wula@snu.edu.in",
+		"logo": "/club-logos/cultural/wula.png",
+		"category": "cultural"
+	},
+	{
+		"name": "Technical Committee",
+		"details": "The Technical Affairs Committee (TAC) at SNU is committed to fostering innovation and technical excellence on campus. Composed of passionate members from the student body itself, we assist our large number of technical societies in the planning of events and oversight of internal working, ensuring they have the resources they need. Through all schools and departments, be it local chapters or fresh societies, the TAC leaves no stone unturned in providing unwavering support and guidance, ensuring success.",
+		"instagram": "https://www.instagram.com/technicalcommittee.snu",
+		"handle": "@technicalcommittee.snu",
+		"email": "technical.committee@snu.edu.in",
+		"logo": "/club-logos/technical/technical-committee.jpg",
+		"category": "technical"
+	},
+	{
+		"name": "ACM Student Chapter",
+		"details": "The ACM (Association for Computer Machinery) Student Chapter is the Computer Science Society at Shiv Nadar University. We organize programming competitions and practice sessions, research talks by professionals from academia and industry, tutorials on technical subjects, and other computer science outreach activities on campus. Our activities aim to promote appreciation of the intellectual richness of the discipline while developing valuable professional skills in the student community.",
+		"instagram": "https://www.instagram.com/acmsnu",
+		"handle": "@acmsnu",
+		"email": "acm@snu.edu.in",
+		"logo": "/club-logos/technical/acm-student-chapter.png",
+		"category": "technical"
+	},
+	{
+		"name": "ACM-W Student Chapter",
+		"details": "ACM-W (Association for Computing Machinery - Women in Computing, Shiv Nadar University) is a local chapter of ACM-W dedicated to supporting, celebrating, and advocating for women in computing. ACM-W provides a wide range of programs and services to ACM members and works to advance the contributions of technical women. ACM-W encourages more women participation, unites educators, researchers and professionals to inspire dialogue, share resources and address the field's challenges.",
+		"instagram": "https://www.instagram.com/acmw.snu",
+		"handle": "@acmw.snu",
+		"email": "acmw@snu.edu.in",
+		"logo": "/club-logos/technical/acm-w-student-chapter.jpg",
+		"category": "technical"
+	},
+	{
+		"name": "Analytica",
+		"details": "Analytica is Shiv Nadar University's pioneering club dedicated to Data Science, Data Analytics, AI, and ML. Our mission is to foster a vibrant community where students can explore and excel in these fields through engaging workshops, seminars, and hands-on projects. We aim to drive innovation and inclusivity, empowering students to achieve greatness through the power of data.",
+		"instagram": "https://www.instagram.com/analytica.snu",
+		"handle": "@analytica.snu",
+		"email": "club.ai@snu.edu.in",
+		"logo": "/club-logos/technical/analytica.jpg",
+		"category": "technical"
+	},
+	{
+		"name": "ASCE",
+		"details": "The ASCE chapter club at our institution is a vibrant community of civil engineering enthusiasts. Our mission is to elevate technical prowess and foster professional growth through engaging programs and activities. We offer opportunities for skill refinement and idea exchange. With access to research resources and mentorship, our club aims to ignite passion and excellence in civil engineering endeavours.",
+		"instagram": "https://www.instagram.com/asce.snioe",
+		"handle": "@asce.snioe",
+		"email": "asce.snioe@snu.edu.in",
+		"logo": "/club-logos/technical/asce.jpg",
+		"category": "technical"
+	},
+	{
+		"name": "ASHRAE",
+		"details": "ASHRAE SNIOE Chapter helps to serve humanity by advancing the arts and sciences related to energy technology and their allied fields. To help the society advancing human well-being through sustainable technology for the built environment. The Society and its members focus on building systems, energy efficiency, indoor air quality, refrigeration and sustainability within the industry etc. Through research, standards writing, publishing and continuing education, ASHRAE shapes tomorrow’s built environment today.",
+		"instagram": "https://www.instagram.com/ashrae_snioe",
+		"handle": "@ashrae_snioe",
+		"email": "ashrae@snu.edu.in",
+		"logo": "/club-logos/technical/ashrae.jpg",
+		"category": "technical"
+	},
+	{
+		"name": "ASME",
+		"details": "ASME-SNU offers a dynamic platform for engineering students, aiming to enhance technical competency and professional well-being. Engaging in events like E-Fest, it fosters global connections and provides opportunities for skill development and idea sharing. With a focus on design and innovation competitions, as well as access to research archives and mentorship, it inspires students to thrive in the world of engineering.",
+		"instagram": "https://www.instagram.com/asme_snioe",
+		"handle": "@asme_snioe",
+		"email": "asme@snu.edu.in",
+		"logo": "/club-logos/technical/asme.png",
+		"category": "technical"
+	},
+	{
+		"name": "Beyond Borders",
+		"details": "Beyond Borders is the official society of the Department of International Relations and Governance Studies (IRGS). Despite being a young club, we strive to make the course and university experience extend beyond classroom lectures by conducting a variety of events that provide enriching engagement with the course content. Our core aim is to offer fruitful engagement to International Relations students through events and activities that encourage critical interaction with the course material, combining academically stimulating and enjoyable activities to deeply involve students with both the course and each other.",
+		"instagram": "https://www.instagram.com/beyondborders.snioe",
+		"handle": "@beyondborders.snioe",
+		"email": "beyondborders@snu.edu.in",
+		"logo": "/club-logos/technical/beyond-borders.jpg",
+		"category": "technical"
+	},
+	{
+		"name": "Celestia Explora",
+		"details": "As a chapter of SEDS (Students for Exploration and Development of Space) at Shiv Nadar University, we promote the love for astronomy and all things space by organizing stargazing nights, discussions, screenings and other exciting events in the university. We are a club not just for people in the STEM fields but for anyone who likes to wonder how the universe works.",
+		"instagram": "https://www.instagram.com/celestia_explora.snioe",
+		"handle": "@celestia_explora.snioe",
+		"email": "celestia.explora@snu.edu.in",
+		"logo": "/club-logos/technical/celestia-explora.png",
+		"category": "technical"
+	},
+	{
+		"name": "Design Club",
+		"details": "The Design Club of Shiv Nadar University is a vibrant community fostering creativity and innovation. Focused on enhancing design skills and promoting collaborative projects, the club aims to provide students with hands- on experience in various design disciplines. Through workshops, competitions, and guest lectures, members are encouraged to explore new ideas and push the boundaries of conventional design. The club's mission is to cultivate a supportive environment where aspiring designers can grow and contribute to impactful projects, reflecting the university's commitment to nurturing talent and creativity. Our motto is Unite. Create. Inspire.",
+		"instagram": "https://www.instagram.com/designclubsnu",
+		"handle": "@designclubsnu",
+		"email": "design.club@snu.edu.in",
+		"logo": "/club-logos/technical/design-club.jpg",
+		"category": "technical"
+	},
+	{
+		"name": "E-Cell",
+		"details": "E-cell strives to provide a platform for students and faculty to create, innovate, incubate and realise their entrepreneurial dreams while encouraging to “think upside down” to venture beyond the normal. By fostering a collaborative environment, we aim to transform visionary ideas into successful ventures.",
+		"instagram": "https://www.instagram.com/ecellsnioe",
+		"handle": "@ecellsnioe",
+		"email": "ecell@snu.edu.in",
+		"logo": "/club-logos/technical/e-cell.png",
+		"category": "technical"
+	},
+	{
+		"name": "Finvest",
+		"details": "At Finvest we are committed to expanding financial literacy and promoting financial independence among the student body. Our goal is to empower individuals with the knowledge and skills necessary to make informed financial decisions and take control of their financial future We achieve this through a variety of engaging events and interactive sessions, such as Snifty and Finverse. Our community of dedicated members is dedicated to helping others achieve their financial goals",
+		"instagram": "https://www.instagram.com/finvest_snu",
+		"handle": "@finvest_snu",
+		"email": "finvest@snu.edu.in",
+		"logo": "/club-logos/technical/finvest.png",
+		"category": "technical"
+	},
+	{
+		"name": "Genesis",
+		"details": "What good is life science if you cannot communicate it? The students of the life science department have come together to break all barriers between the life science and the general public. Killing stereotypes to make it fun and understandable. With talks, movie screenings, and many more fun events, we strive to bring out the inner scientist in you!",
+		"instagram": "https://www.instagram.com/genesis_snioe",
+		"handle": "@genesis_snioe",
+		"email": "genesis@snu.edu.in",
+		"logo": "/club-logos/technical/genesis.png",
+		"category": "technical"
+	},
+	{
+		"name": "Google Developer Student Club",
+		"details": "Google Developer Student Clubs are university based community groups for students interested in Google developer technologies. Students from all undergraduate or graduate programs with an interest in growing as a developer are welcome. By joining a GDSC, students grow their knowledge in a peer-to-peer learning environment and build solutions for local businesses and their community.",
+		"instagram": "https://www.instagram.com/gdsc.snioe",
+		"handle": "@gdsc.snioe",
+		"email": "dsc.club@snu.edu.in",
+		"logo": "/club-logos/technical/google-developer-student-club.jpg",
+		"category": "technical"
+	},
+	{
+		"name": "H20",
+		"details": "H2O - House of Habers:The Chemical Engineering Society is a society for students interested in chemical engineering by organizing educational workshops, networking events, and industry talks. We aim to enhance member's academic and professional development while promoting collaboration & innovation within the field.",
+		"instagram": "https://www.instagram.com/h20_snioe",
+		"handle": "@h20_snioe",
+		"email": "secy.h2o.chd@snu.edu.in",
+		"logo": "/club-logos/technical/h20.jpg",
+		"category": "technical"
+	},
+	{
+		"name": "IEEE",
+		"details": "IEEE is the world’s largest technical professional organization dedicated to advancing technology for the benefit of humanity. IEEE and its members inspire a global community through its highly cited publications, conferences, technology standards, and professional and educational activities.",
+		"instagram": "https://www.instagram.com/snioe_ieee",
+		"handle": "@snioe_ieee",
+		"email": "ieee@snu.edu.in",
+		"logo": "/club-logos/technical/ieee.png",
+		"category": "technical"
+	},
+	{
+		"name": "Manzar",
+		"details": "Manzar, the Visual Anthropology Society, creates a collaborative space where students from all disciplines unite to learn about and create ethnographic films. Visual anthropology, an interdisciplinary field, employs film, photography, and other media to explore and communicate the nuances of culture, society, and human experience.  By curating diverse visuals, Manzar fosters a deeper understanding of the ways of seeing and image-making.",
+		"instagram": "https://www.instagram.com/manzar.visuality",
+		"handle": "@manzar.visuality",
+		"email": "manzar.visuality@snu.edu.in",
+		"logo": "/club-logos/technical/manzar.png",
+		"category": "technical"
+	},
+	{
+		"name": "Mnemon",
+		"details": "Mnemon, the History and Archaeology Society, aims to organise and host events that make history a more accessible discipline. The routine events of the club include organising a History Week, having game nights, discussions, film screenings, and partaking in heritage walks. The club's ethos is essentially the creation of an environment in which everyone is comfortable engaging with the various aspects of the discipline, and various discourses related to it.",
+		"instagram": "https://www.instagram.com/mnemon_snu",
+		"handle": "@mnemon_snu",
+		"email": "mnemon@snu.edu.in",
+		"logo": "/club-logos/technical/mnemon.jpg",
+		"category": "technical"
+	},
+	{
+		"name": "Robo Yantriki",
+		"details": "RoboYantriki, the Tech Heart of SNIoE is the place to tinker, innovate and create. Giving students enough exposure to various events and competitions through hands-on experience and curiosity. We are a multidisciplinary club enhancing problem solving and overall skill growth of individuals, with numerous achievements at national and international competitions.",
+		"instagram": "https://www.instagram.com/roboyantriki.snu",
+		"handle": "@roboyantriki.snu",
+		"email": "robo.yantriki@snu.edu.in",
+		"logo": "/club-logos/technical/robo-yantriki.jpg",
+		"category": "technical"
+	},
+	{
+		"name": "SAE Collegiate Club",
+		"details": "SAEINDIA is an affiliate society of SAE International, registered as an Indian non-profit engineering and scientific society dedicated to the advancement of the mobility community in India. The chapter provides engineering students with practical exposure to a leading professional automative engineering society and the framework to start expanding automative and automobile engineering activities without starting from scratch.",
+		"instagram": "https://www.instagram.com/sae_snioe",
+		"handle": "@sae_snioe",
+		"email": "sae.snu@snu.edu.in",
+		"logo": "/club-logos/technical/sae-collegiate-club.png",
+		"category": "technical"
+	},
+	{
+		"name": "ShilpKulam",
+		"details": "ShilpKulam is the mechanical society of SNU, whose main aim is to make the students realise the importance of the subjects that they learn in their curriculum by inculcating it in the real life projects. The society believes in faculty - student interaction, among students kind of industry-oriented topics. The society has been conducting workshops and guest lectures on different subjects to garnish interest and enthusiasm of the students as per their interest.",
+		"instagram": "https://www.instagram.com/shilpkulam",
+		"handle": "@shilpkulam",
+		"email": "shilp.kulam@snu.edu.in",
+		"logo": "/club-logos/technical/shilpkulam.jpg",
+		"category": "technical"
+	},
+	{
+		"name": "SNU CES",
+		"details": "SNUCES, the civil engineering society of SNU is a technical club comprising of civil engineering enthusiasts. The society promotes industry-academic partnership for objective oriented learning and industrial relevance in academic research. It has been organising industrial visits and talks. In the recent past, the society has conducted several events and workshops for civil engineering software like Revit, BIM, and AUTOCAD.",
+		"instagram": "https://www.instagram.com/snuces",
+		"handle": "@snuces",
+		"email": "snu.ces@snu.edu.in",
+		"logo": "/club-logos/technical/snu-ces.jpg",
+		"category": "technical"
+	},
+	{
+		"name": "The Chemistry Society",
+		"details": "Chemistry is a central science, laying the foundation for understanding every phenomenon in the universe. The Chemistry Society is a technical club under the Department of Chemistry where we bring all chemistry enthusiasts under a single roof to satisfy their curiosity, share their knowledge and get a new perspective of the subject. Just like the subject itself, we are a versatile group that deals in revealing complex concepts in an enjoyable manner.",
+		"instagram": "https://www.instagram.com/chemsoc.snu",
+		"handle": "@chemsoc.snu",
+		"email": "chemistry.society@snu.edu.in",
+		"logo": "/club-logos/technical/the-chemistry-society.jpg",
+		"category": "technical"
+	},
+	{
+		"name": "The Economics Society",
+		"details": "The Economics Society, SNIoE is a student-run society which aims to foster study and discussions pertaining to Economics. It is dedicated towards promoting Economics not only on academic grounds but through a culture which appreciates variability and versatility.  The Economics Society holds its annual flagship event, Iqtisadiyyat which serves as a platform for accomplished academics and industry leaders to engage in economic discourse with students and provide valuable insights into the workings of the real world.",
+		"instagram": "https://www.instagram.com/economicssociety_snu",
+		"handle": "@economicssociety_snu",
+		"email": "economicssociety@snu.edu.in",
+		"logo": "/club-logos/technical/the-economics-society.png",
+		"category": "technical"
+	},
+	{
+		"name": "The Mathematics Society",
+		"details": "The Department of Mathematics founded club indulges in mathematical events in not only academic but daily lives amongst the students to bolster fresher and riper perspectives to mathematics and its applications. Probabilistic games are a campus-favourite and a regular event by the society.",
+		"instagram": "https://www.instagram.com/mathsoc_snu",
+		"handle": "@mathsoc_snu",
+		"email": "mathsoc@snu.edu.in",
+		"logo": "/club-logos/technical/the-mathematics-society.jpg",
+		"category": "technical"
+	},
+	{
+		"name": "The Physics Society",
+		"details": "The Physics society at SNU is founded with a strong will for nurturing physics in various possible ways. Its sole object is,and shall be, promoting physics and bringing physicists among students. It will provide a common forum for enthusiasts of physics at SNU for discussing subjects of common interest. Moreover, it will invite renowned national international academicians and researchers among students for enriching scientific temperament within and outside SNU.",
+		"instagram": "https://www.instagram.com/physoc_snu",
+		"handle": "@physoc_snu",
+		"email": "physics.society@snu.edu.in",
+		"logo": "/club-logos/technical/the-physics-society.png",
+		"category": "technical"
+	},
+	{
+		"name": "Totem Pole",
+		"details": "Totempole, the Sociology Club at Shiv Nadar University is where sociology meets fun! We, together as a club, dive into lively discussions, engaging screenings, and exciting games - exploring the fascinating world of sociology! Let's show how society's threads are woven together.",
+		"instagram": "https://www.instagram.com/thetotempole_snioe",
+		"handle": "@thetotempole_snioe",
+		"email": "totempole@snu.edu.in",
+		"logo": "/club-logos/technical/totem-pole.jpg",
+		"category": "technical"
+	},
+	{
+		"name": "Trivium",
+		"details": "Trivium, the English Department Society of Shiv Nadar University, is full of spirited students dedicated to literature. Through a milieu of diverse events, such as the annual two-day literature fest, weekly film screenings, reading groups, and cultural appreciation sessions, the society brings a creative air to campus life. Through such engagement with the student community, the society aims to make literature accessible, and remove barriers to cultural appreciation.",
+		"instagram": "https://www.instagram.com/trivium.snu",
+		"handle": "@trivium.snu",
+		"email": "trivium@snu.edu.in",
+		"logo": "/club-logos/technical/trivium.png",
+		"category": "technical"
+	}
+]

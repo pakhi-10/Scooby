@@ -1,5 +1,5 @@
 <script lang="ts">
-	type IconName = "calendar" | "exam" | "plus";
+	type IconName = "calendar" | "exam" | "clubs" | "plus";
 
 	type Feature = {
 		title: string;
@@ -19,10 +19,18 @@
 			tag: "Timetable",
 		},
 		{
+			title: "Club Info",
+			description:
+				"Browse every cultural and technical club on campus — what they do, their logos, and where to follow them.",
+			href: "/clubs",
+			icon: "clubs",
+			tag: "Campus",
+		},
+		{
 			title: "Exam Timetable",
 			description:
 				"Search your courses and build your personal mid-sem or end-sem exam schedule. Export it as an image or to your calendar.",
-			href: "/midsem",
+			href: "/exam",
 			icon: "exam",
 			tag: "Exams",
 		},
@@ -49,6 +57,11 @@
 			<path d="M6 4a1 1 0 0 1 1-1h6l5 5v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4z" />
 			<path d="M13 3v5h5" />
 			<path d="M9 13l1.75 1.75L14 11.5" />
+		{:else if name === "clubs"}
+			<circle cx="9" cy="8" r="3" />
+			<path d="M3.5 19a5.5 5.5 0 0 1 11 0" />
+			<path d="M16 5.5a3 3 0 0 1 0 5.5" />
+			<path d="M17 14.2a5.5 5.5 0 0 1 3.5 4.8" />
 		{:else if name === "plus"}
 			<path d="M12 6v12M6 12h12" />
 		{/if}

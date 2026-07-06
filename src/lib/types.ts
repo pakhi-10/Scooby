@@ -119,6 +119,17 @@ export function timesOverlap(start1: string, end1: string, start2: string, end2:
     return s1 < e2 && s2 < e1;
 }
 
+// Club info (parsed from the Recruitment Forms workbook)
+export interface Club {
+    name: string;
+    details: string;
+    instagram: string;   // full URL, may be empty
+    handle: string;      // e.g. "@culturalcommittee.snu", may be empty
+    email: string;       // club email ID, may be empty
+    logo: string;        // path under /club-logos, may be empty
+    category: 'cultural' | 'technical';
+}
+
 // Exam type for mid-sem/end-sem exams
 export interface Exam {
     courseCode: string;
