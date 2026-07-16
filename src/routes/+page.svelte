@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Seo from "$lib/components/Seo.svelte";
 
-	type IconName = "calendar" | "exam" | "clubs" | "plus";
+	type IconName = "calendar" | "exam" | "clubs" | "switch" | "plus";
 
 	type Feature = {
 		title: string;
@@ -36,6 +36,14 @@
 			icon: "exam",
 			tag: "Exams",
 		},
+		{
+			title: "Room Switch",
+			description:
+				"Want to swap hostel rooms? Post your room, browse others in your hostel, and connect over WhatsApp to sort out a mutual switch.",
+			href: "/room-switch",
+			icon: "switch",
+			tag: "Hostel",
+		},
 	];
 </script>
 
@@ -64,6 +72,9 @@
 			<path d="M3.5 19a5.5 5.5 0 0 1 11 0" />
 			<path d="M16 5.5a3 3 0 0 1 0 5.5" />
 			<path d="M17 14.2a5.5 5.5 0 0 1 3.5 4.8" />
+		{:else if name === "switch"}
+			<path d="M4 8h13M13 4l4 4-4 4" />
+			<path d="M20 16H7M11 20l-4-4 4-4" />
 		{:else if name === "plus"}
 			<path d="M12 6v12M6 12h12" />
 		{/if}
