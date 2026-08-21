@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Seo from "$lib/components/Seo.svelte";
 
-	type IconName = "calendar" | "exam" | "clubs" | "switch" | "map" | "plus";
+	type IconName = "calendar" | "exam" | "clubs" | "switch" | "map" | "plus" | "grade";
 
 	type Feature = {
 		title: string;
@@ -53,6 +53,14 @@
 			href: "/room-switch",
 			icon: "switch",
 			tag: "Hostel",
+		},
+		{
+			title: "Grade Predictor",
+			description:
+				"Predict your grade and keep track of your progress in a course.",
+			href: "/grade-pred",
+			icon: "grade",
+			tag: "Grades",
 		},
 	];
 </script>
