@@ -182,8 +182,6 @@
 	}
 	.course-tile.expanded {
 		grid-column: 1 / -1;
-		max-width: 92%;
-    	margin: 0 auto;
 	}
 
 	/* -- Collapsed tile: fixed size, content top, toggle pinned to bottom center -- */
@@ -348,6 +346,30 @@
 		}
 		.courses-grid {
 			grid-template-columns: 1fr;
+			gap: 1.25rem;
+		}
+		.course-tile.expanded {
+			max-width: 100%;
+		}
+		.tile-collapsed-content,
+		.add-tile {
+			min-height: 0;
+		}
+		.tile-collapsed-content {
+			padding: 1.5rem 1.5rem 0.5rem;
+			gap: 0.6rem;
+		}
+		.course-tile:not(.expanded) {
+			min-height: 0;
+		}
+		.tile-name {
+			font-size: 1.3rem;
+		}
+		.tile-total {
+			font-size: 2rem;
+		}
+		.add-tile {
+			min-height: 140px;
 		}
 	}
 </style>

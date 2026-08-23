@@ -1,5 +1,4 @@
 <script lang="ts">
-	// import ProgressChart from './ProgressChart.svelte';
 
 	import {
 		COMPONENT_TYPES,
@@ -15,7 +14,6 @@
 		totalWeightage,
 		studentTotalPct,
 		classAvgTotalPct
-		// buildChartSeries 
 	} from '$lib/gradeCalculations';
 	import { generateId } from '$lib/id';
 
@@ -50,7 +48,6 @@
 	$: studentTotal = studentTotalPct(course.components);
 	$: classAvgTotal = course.mode === 'relative' ? classAvgTotalPct(course.components) : null;
 
-	// $: chart = buildChartSeries(course);
 </script>
 
 <div class="course-card">
@@ -200,15 +197,6 @@
 		{/if}
 	</div>
 
-	
-		<!-- {#if course.mode === 'relative'}
-			<ProgressChart
-				labels={chart.labels}
-				studentValues={chart.studentValues}
-				classAvgValues={chart.classAvgValues}
-			/>
-		{/if} -->
-	
 </div>
 
 <style>
@@ -500,13 +488,38 @@
 	}
 
 	@media (max-width: 640px) {
+		.course-card {
+			padding: 1.1rem;
+		}
+		.course-header {
+			flex-wrap: wrap;
+		}
+		.course-name-input {
+			min-width: 0;
+			width: 100%;
+		}
+		.mode-toggle {
+			flex-wrap: wrap;
+		}
 		.comp-top {
 			flex-direction: column;
 			align-items: stretch;
 			gap: 0.75rem;
 		}
+		.comp-top-left,
+		.weightage-field {
+			width: 100%;
+		}
+		.select {
+			min-width: 0;
+			width: 100%;
+		}
 		.future-checkbox {
 			margin-left: 0;
+		}
+		.best-of-row {
+			flex-wrap: wrap;
+			row-gap: 0.5rem;
 		}
 		.marks-header,
 		.marks-row,
@@ -514,6 +527,22 @@
 		.marks-table.with-avg .marks-row {
 			grid-template-columns: 1fr;
 			gap: 0.4rem;
+		}
+		.marks-input {
+			flex-wrap: wrap;
+		}
+		.mini-input {
+			width: 100%;
+			min-width: 0;
+			max-width: 90px;
+		}
+		.totals {
+			flex-direction: column;
+		}
+		.total-box {
+			min-width: 0;
+			width: 100%;
+			box-sizing: border-box;
 		}
 	}
 </style>
