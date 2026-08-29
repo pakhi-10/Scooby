@@ -58,6 +58,16 @@
 	$: studentTotal = studentTotalPct(course.components);
 	$: classAvgTotal = course.mode === 'relative' ? classAvgTotalPct(course.components) : null;
 
+	// How much weightage is still "open" (not yet graded) — this is the pool
+	// the student still has a chance to earn marks on.
+	$: gradedWeight = totalWeightage(course.components.filter((c) => !c.isFuture));
+	$: remainingWeight = Math.max(0, 100 - gradedWeight);
+	// Average % the student needs across that remaining weightage to land on
+	// their target total: (target - current total) / remaining weight * 100.
+	$: remainingAimValue =
+		remainingWeight > 0 ? ((course.targetPct - studentTotal) / remainingWeight) * 100 : null;
+	$: remainingAimDisplay = remainingAimValue === null ? '—' : `${remainingAimValue.toFixed(2)}%`;
+
 	// Chronological progress chart data: only graded (non-future) components,
 	// ordered by the student-set order dropdown.
 	$: orderedComponents = [...course.components]
@@ -219,15 +229,24 @@
 		</div>
 			<div class="total-box target-box">
 			<span class="total-label">Target</span>
-			<div class="target-input-wrap">
-				<input
-					type="number"
-					min="0"
-					max="100"
-					class="target-input"
-					bind:value={course.targetPct}
-				/>
-				<span class="target-suffix">%</span>
+			<span
+				class="remaining-aim"
+				title="Average % needed on your remaining {remainingWeight.toFixed(0)}% weightage to hit your target"
+			>
+				{remainingAimDisplay}
+			</span>
+			<div class="total-aim-row">
+				<span class="total-aim-label">Total aim</span>
+				<div class="target-input-wrap">
+					<input
+						type="number"
+						min="0"
+						max="100"
+						class="target-input"
+						bind:value={course.targetPct}
+					/>
+					<span class="target-suffix">%</span>
+				</div>
 			</div>
 		</div>
 		{#if course.mode === 'relative' && classAvgTotal !== null}
@@ -547,28 +566,46 @@
 	.target-box {
 	border-color: #f5f5f5;
 	}
+	.remaining-aim {
+		font-size: 1.4rem;
+		font-weight: 700;
+		color: #f5f5f5;
+	}
+	.total-aim-row {
+		display: flex;
+		align-items: baseline;
+		gap: 0.35rem;
+		margin-top: 0.15rem;
+	}
+	.total-aim-label {
+		font-family: var(--font-mono, monospace);
+		font-size: 0.68rem;
+		color: var(--text-muted, #9ca3af);
+	}
 	.target-input-wrap {
 		display: flex;
 		align-items: baseline;
-		gap: 0.25rem;
+		gap: 0.2rem;
 	}
 	.target-input {
 		background: transparent;
 		border: none;
-		color: #f5f5f5;
-		font-size: 1.4rem;
-		font-weight: 700;
-		width: 4ch;
+		border-bottom: 1px dashed var(--border, #2e2e2e);
+		color: var(--text-secondary, #d1d5db);
+		font-size: 0.85rem;
+		font-weight: 600;
+		width: 3ch;
 		padding: 0;
 		font-family: inherit;
 	}
 	.target-input:focus {
 		outline: none;
+		border-bottom-color: var(--border-hover, #525252);
 	}
 	.target-suffix {
-		font-size: 1.4rem;
-		font-weight: 700;
-		color: #f5f5f5;
+		font-size: 0.85rem;
+		font-weight: 600;
+		color: var(--text-secondary, #d1d5db);
 	}
 
 	.progress-section {
