@@ -66,14 +66,6 @@ export function computeComponentScore(
 		return { valid: true, pctValue: iterationPct(it, field), note: null };
 	}
 
-	if (component.bestOfTotal === 1) {
-		return {
-			valid: false,
-			pctValue: 0,
-			note: 'Fill at least 2 attempts (increase "out of") for this to count toward the total — temporary limitation.'
-		};
-	}
-
 	return { valid: true, pctValue: averageOfBestAttempts(component, field), note: null };
 }
 

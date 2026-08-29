@@ -27,10 +27,6 @@ export const COMPONENT_TYPES: ComponentType[] = [
 	'Other'
 ];
 
-// Component types that can be made up of multiple graded attempts
-// (e.g. "best 2 out of 3 quizzes"), each entered as its own marks row.
-// Project/Presentation are treated as one-off, like Midsem/Endsem —
-// flip that here if you want best-of behavior for them too.
 export const BEST_OF_TYPES: ComponentType[] = [
 	'Quiz',
 	'Assignment',
@@ -43,7 +39,6 @@ export function needsBestOf(type: ComponentType): boolean {
 	return BEST_OF_TYPES.includes(type);
 }
 
-/** One graded attempt within a component (e.g. "Quiz 2 of 3"). */
 export interface MarksIteration {
 	id: string;
 	studentObtained: number;
@@ -55,15 +50,13 @@ export interface MarksIteration {
 export interface GradedComponent {
 	id: string;
 	type: ComponentType;
-	/** Single weightage for the whole component — not per attempt. */
 	weightage: number;
-	/** "Best X" — how many top attempts count. Null = count all attempts entered. */
 	bestOfCount: number | null;
-	/** "/ Y" — how many attempts exist in total. Null/0/1 = not using best-of. */
 	bestOfTotal: number | null;
 	iterations: MarksIteration[];
-	/** Placeholder for a component the student knows is coming but hasn't been graded/announced yet. */
 	isFuture: boolean;
+	/** 1-based chronological position of this component, set by the student via the order dropdown. */
+	order: number;
 }
 
 export interface Course {
@@ -71,6 +64,8 @@ export interface Course {
 	name: string;
 	mode: GradingMode;
 	components: GradedComponent[];
+	/** The percentage the student is aiming for in this course. */
+	targetPct: number;
 }
 
 export function createEmptyIteration(id: string): MarksIteration {
@@ -91,17 +86,15 @@ export function createEmptyComponent(id: string): GradedComponent {
 		bestOfCount: null,
 		bestOfTotal: null,
 		iterations: [createEmptyIteration(`${id}-iter-1`)],
-		isFuture: false
+		isFuture: false,
+		order: 1
 	};
 }
 
-// Some component names are plural in the dropdown but should read
-// singular when numbered, e.g. "Lab Assignments" -> "lab assignment 1".
 const SINGULAR_OVERRIDES: Partial<Record<ComponentType, string>> = {
 	'Lab Assignments': 'Lab Assignment'
 };
 
-/** e.g. attemptLabel('Quiz', 2) -> 'quiz 2', attemptLabel('Lab Assignments', 1) -> 'lab assignment 1' */
 export function attemptLabel(type: ComponentType, index: number): string {
 	const base = SINGULAR_OVERRIDES[type] ?? type;
 	return `${base.toLowerCase()} ${index}`;
@@ -112,21 +105,17 @@ export function createEmptyCourse(id: string): Course {
 		id,
 		name: '',
 		mode: 'relative',
-		components: []
+		components: [],
+		targetPct: 0
 	};
 }
 
-/** How many marks-entry rows a component should currently show. */
 export function requiredIterationCount(comp: Pick<GradedComponent, 'type' | 'bestOfTotal'>): number {
 	if (!needsBestOf(comp.type)) return 1;
 	if (!comp.bestOfTotal || comp.bestOfTotal < 1) return 1;
 	return comp.bestOfTotal;
 }
 
-/**
- * Grows or shrinks a component's iteration list to match its current
- * "out of Y" value. Pass a fresh id each time an iteration is added.
- */
 export function syncComponentIterations(
 	comp: GradedComponent,
 	makeId: () => string
@@ -145,7 +134,6 @@ export function syncComponentIterations(
 	return { ...comp, iterations };
 }
 
-/** Resets a component back to plain single-entry mode (used when switching away from a best-of type). */
 export function resetToSingleIteration(comp: GradedComponent): GradedComponent {
 	return {
 		...comp,
@@ -153,4 +141,37 @@ export function resetToSingleIteration(comp: GradedComponent): GradedComponent {
 		bestOfTotal: null,
 		iterations: comp.iterations.slice(0, 1)
 	};
+}
+
+/**
+ * Reassigns `order` across all components to a clean 1..N sequence based on
+ * each component's current relative order. Use after removing a component so
+ * the remaining dropdown values stay contiguous.
+ */
+export function renumberOrders(components: GradedComponent[]): GradedComponent[] {
+	const sorted = [...components].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+	const positionById = new Map(sorted.map((c, i) => [c.id, i + 1]));
+	return components.map((c) => ({ ...c, order: positionById.get(c.id) ?? c.order }));
+}
+
+/**
+ * Sets one component's order to `newOrder`, swapping with whichever other
+ * component currently holds that slot so the set of orders stays a valid
+ * 1..N permutation instead of ending up with duplicates.
+ */
+export function setComponentOrder(
+	components: GradedComponent[],
+	id: string,
+	newOrder: number
+): GradedComponent[] {
+	const target = components.find((c) => c.id === id);
+	if (!target) return components;
+	const oldOrder = target.order;
+	if (newOrder === oldOrder) return components;
+
+	return components.map((c) => {
+		if (c.id === id) return { ...c, order: newOrder };
+		if (c.order === newOrder) return { ...c, order: oldOrder };
+		return c;
+	});
 }

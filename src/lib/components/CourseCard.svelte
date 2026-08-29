@@ -7,25 +7,31 @@
 		createEmptyComponent,
 		syncComponentIterations,
 		resetToSingleIteration,
+		renumberOrders,
+		setComponentOrder,
 		type Course,
 		type GradedComponent
 	} from '$lib/grade';
 	import {
 		totalWeightage,
 		studentTotalPct,
-		classAvgTotalPct
+		classAvgTotalPct,
+		computeComponentScore
 	} from '$lib/gradeCalculations';
 	import { generateId } from '$lib/id';
+	import ProgressChart from '$lib/components/ProgressChart.svelte';
 
 	export let course: Course;
 	export let onRemove: (id: string) => void = () => {};
 
 	function addComponent() {
-		course.components = [...course.components, createEmptyComponent(generateId(`${course.id}-comp`))];
+		const comp = createEmptyComponent(generateId(`${course.id}-comp`));
+		comp.order = course.components.length + 1;
+		course.components = [...course.components, comp];
 	}
 
 	function removeComponent(id: string) {
-		course.components = course.components.filter((c) => c.id !== id);
+		course.components = renumberOrders(course.components.filter((c) => c.id !== id));
 	}
 
 	function replaceComponent(updated: GradedComponent) {
@@ -44,9 +50,25 @@
 		}
 	}
 
+	function onOrderChange(comp: GradedComponent, newOrder: number) {
+		course.components = setComponentOrder(course.components, comp.id, newOrder);
+	}
+
 	$: weightSum = totalWeightage(course.components);
 	$: studentTotal = studentTotalPct(course.components);
 	$: classAvgTotal = course.mode === 'relative' ? classAvgTotalPct(course.components) : null;
+
+	// Chronological progress chart data: only graded (non-future) components,
+	// ordered by the student-set order dropdown.
+	$: orderedComponents = [...course.components]
+		.filter((c) => !c.isFuture)
+		.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+	$: chartLabels = orderedComponents.map((c) => c.type);
+	$: chartStudent = orderedComponents.map((c) => computeComponentScore(c, 'student').pctValue);
+	$: chartClassAvg =
+		course.mode === 'relative'
+			? orderedComponents.map((c) => computeComponentScore(c, 'classAvg').pctValue)
+			: null;
 
 </script>
 
@@ -103,6 +125,19 @@
 					Future component
 				</label>
 
+				<div class="order-field">
+					<span class="field-label">Order</span>
+					<select
+						class="select order-select"
+						value={comp.order}
+						on:change={(e) => onOrderChange(comp, Number(e.currentTarget.value))}
+					>
+						{#each course.components.map((_, idx) => idx + 1) as n}
+							<option value={n}>{n}</option>
+						{/each}
+					</select>
+				</div>
+
 				<button
 					class="icon-btn small"
 					on:click={() => removeComponent(comp.id)}
@@ -134,12 +169,6 @@
 					</div>
 				{/if}
 
-				{#if needsBestOf(comp.type) && comp.bestOfTotal === 1}
-					<p class="note">
-						Fill at least 2 attempts (set the second number above to 2+) for this to count toward
-						the total — temporary limitation.
-					</p>
-				{:else}
 					<div class="marks-table" class:with-avg={course.mode === 'relative'}>
 						<div class="marks-header">
 							<span></span>
@@ -171,7 +200,6 @@
 							</div>
 						{/each}
 					</div>
-				{/if}
 			{:else}
 				<p class="future-note">Future component — nothing to track yet.</p>
 			{/if}
@@ -189,12 +217,30 @@
 			<span class="total-label">Total</span>
 			<span class="total-value student">{studentTotal.toFixed(2)}%</span>
 		</div>
+			<div class="total-box target-box">
+			<span class="total-label">Target</span>
+			<div class="target-input-wrap">
+				<input
+					type="number"
+					min="0"
+					max="100"
+					class="target-input"
+					bind:value={course.targetPct}
+				/>
+				<span class="target-suffix">%</span>
+			</div>
+		</div>
 		{#if course.mode === 'relative' && classAvgTotal !== null}
 			<div class="total-box">
 				<span class="total-label">Estimated class average total</span>
 				<span class="total-value class-avg">{classAvgTotal.toFixed(2)}%</span>
 			</div>
 		{/if}
+	</div>
+
+	<div class="progress-section">
+		<h3 class="progress-title">Progress chart</h3>
+		<ProgressChart labels={chartLabels} studentValues={chartStudent} classAvgValues={chartClassAvg} />
 	</div>
 
 </div>
@@ -306,6 +352,18 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.35rem;
+	}
+
+	.order-field {
+		display: flex;
+		flex-direction: column;
+		gap: 0.35rem;
+	}
+
+	.order-select {
+		min-width: 64px;
+		width: 64px;
+		padding: 0.55rem 0.5rem;
 	}
 
 	.field-label {
@@ -449,7 +507,7 @@
 	}
 
 	.weight-warning {
-		color: #fbbf24;
+		color: #f5f5f5;
 		font-size: 0.8rem;
 		margin: -0.4rem 0 1rem;
 	}
@@ -473,7 +531,7 @@
 	.total-label {
 		font-family: var(--font-mono, monospace);
 		font-size: 0.7rem;
-		color: var(--text-muted, #9ca3af);
+		color: var(--text-muted, #fbfcfc);
 		letter-spacing: 0.03em;
 	}
 	.total-value {
@@ -481,10 +539,48 @@
 		font-weight: 700;
 	}
 	.total-value.student {
-		color: #60a5fa;
+		color: #f5f5f5;
 	}
 	.total-value.class-avg {
-		color: #fbbf24;
+		color: #f5f5f5;
+	}
+	.target-box {
+	border-color: #f5f5f5;
+	}
+	.target-input-wrap {
+		display: flex;
+		align-items: baseline;
+		gap: 0.25rem;
+	}
+	.target-input {
+		background: transparent;
+		border: none;
+		color: #f5f5f5;
+		font-size: 1.4rem;
+		font-weight: 700;
+		width: 4ch;
+		padding: 0;
+		font-family: inherit;
+	}
+	.target-input:focus {
+		outline: none;
+	}
+	.target-suffix {
+		font-size: 1.4rem;
+		font-weight: 700;
+		color: #f5f5f5;
+	}
+
+	.progress-section {
+		border-top: 1px solid var(--border, #262626);
+		padding-top: 1.25rem;
+		margin-top: 0.25rem;
+	}
+	.progress-title {
+		font-size: 1rem;
+		font-weight: 600;
+		color: var(--text, #f5f5f5);
+		margin: 0 0 1rem;
 	}
 
 	@media (max-width: 640px) {
@@ -512,6 +608,9 @@
 		}
 		.select {
 			min-width: 0;
+			width: 100%;
+		}
+		.order-select {
 			width: 100%;
 		}
 		.future-checkbox {
