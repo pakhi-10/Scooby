@@ -1,170 +1,278 @@
 <script lang="ts">
+    import { onMount } from 'svelte';
+    import {
+        COMPONENT_TYPES,
+        needsBestOf,
+        attemptLabel,
+        createEmptyComponent,
+        syncComponentIterations,
+        resetToSingleIteration,
+        normalizeIterationOrders,
+        setIterationOrder,
+        // renumberOrders,
+        // setComponentOrder,
+        type Course,
+        type GradedComponent
+    } from '$lib/grade';
+    import {
+        pct,
+        totalWeightage,
+        studentTotalPct,
+        classAvgTotalPct,
+        // computeComponentScore
+    } from '$lib/gradeCalculations';
+    import { generateId } from '$lib/id';
+    import ProgressChart from '$lib/components/ProgressChart.svelte';
 
-	import {
-		COMPONENT_TYPES,
-		needsBestOf,
-		attemptLabel,
-		createEmptyComponent,
-		syncComponentIterations,
-		resetToSingleIteration,
-		renumberOrders,
-		setComponentOrder,
-		type Course,
-		type GradedComponent
-	} from '$lib/grade';
-	import {
-		totalWeightage,
-		studentTotalPct,
-		classAvgTotalPct,
-		computeComponentScore
-	} from '$lib/gradeCalculations';
-	import { generateId } from '$lib/id';
-	import ProgressChart from '$lib/components/ProgressChart.svelte';
+    export let course: Course;
+    export let onRemove: (id: string) => void = () => {};
+        // Cleans up saved courses from before `order`/`targetPct` existed.
 
-	export let course: Course;
-	export let onRemove: (id: string) => void = () => {};
+    onMount(() => {
+        if (typeof course.targetPct !== 'number' || course.targetPct < 0) course.targetPct = 0;
+        course.components = normalizeIterationOrders(course.components);
+    });
 
-	function addComponent() {
-		const comp = createEmptyComponent(generateId(`${course.id}-comp`));
-		comp.order = course.components.length + 1;
-		course.components = [...course.components, comp];
-	}
+    function addComponent() {
+        const comp = createEmptyComponent(generateId(`${course.id}-comp`));
+        course.components = normalizeIterationOrders([...course.components, comp]);
+    }
 
-	function removeComponent(id: string) {
-		course.components = renumberOrders(course.components.filter((c) => c.id !== id));
-	}
+    function removeComponent(id: string) {
+        course.components = normalizeIterationOrders(course.components.filter((c) => c.id !== id));
+    }
 
-	function replaceComponent(updated: GradedComponent) {
-		course.components = course.components.map((c) => (c.id === updated.id ? updated : c));
-	}
+    function replaceComponent(updated: GradedComponent) {
+        course.components = normalizeIterationOrders(
+            course.components.map((c) => (c.id === updated.id ? updated : c))
+        );
+    }
 
-	function onBestOfChange(comp: GradedComponent) {
-		replaceComponent(syncComponentIterations(comp, () => generateId(`${comp.id}-iter`)));
-	}
+    function onBestOfChange(comp: GradedComponent) {
+        replaceComponent(syncComponentIterations(comp, () => generateId(`${comp.id}-iter`)));
+    }
 
-	function onTypeChange(comp: GradedComponent) {
-		if (!needsBestOf(comp.type)) {
-			replaceComponent(resetToSingleIteration(comp));
-		} else {
-			onBestOfChange(comp);
+    function onTypeChange(comp: GradedComponent) {
+        if (!needsBestOf(comp.type)) {
+            replaceComponent(resetToSingleIteration(comp));
+        } else {
+            onBestOfChange(comp);
+        }
+    }
+
+	function onFutureChange() {
+        course.components = normalizeIterationOrders(course.components);
+    }
+
+		function markError(
+		obtained: number | null,
+		total: number | null,
+		who: string,
+		checkTotal = true
+	): { field: 'obtained' | 'total'; msg: string } | null {
+		if (total == null || total <= 0) {
+			return checkTotal ? { field: 'total', msg: 'Total must be greater than 0' } : null;
 		}
+		if (obtained == null) return null;
+		if (obtained < 0) return { field: 'obtained', msg: `${who} cannot be negative` };
+		if (obtained > total) return { field: 'obtained', msg: `${who} cannot be more than the total` };
+		return null;
 	}
 
-	function onOrderChange(comp: GradedComponent, newOrder: number) {
-		course.components = setComponentOrder(course.components, comp.id, newOrder);
+	function bestOfError(
+		count: number | null,
+		total: number | null
+	): { field: 'count' | 'total'; msg: string } | null {
+		if (count == null && total == null) return null;
+		if (total == null) return { field: 'total', msg: 'Fill in the "out of" number' };
+		if (!Number.isInteger(total) || total < 1) {
+			return { field: 'total', msg: 'Must be a whole number, at least 1' };
+		}
+		if (count == null) return null;
+		if (!Number.isInteger(count) || count < 1) {
+			return { field: 'count', msg: 'Must be a whole number, at least 1' };
+		}
+		if (count > total) {
+			return { field: 'count', msg: 'Best-of number cannot be greater than the total' };
+		}
+		return null;
 	}
 
-	$: weightSum = totalWeightage(course.components);
-	$: studentTotal = studentTotalPct(course.components);
-	$: classAvgTotal = course.mode === 'relative' ? classAvgTotalPct(course.components) : null;
+	function weightageError(w: number | null): string | null {
+		if (w == null) return null;
+		if (w < 0) return 'Weightage cannot be negative';
+		if (w > 100) return 'Weightage cannot be more than 100%';
+		return null;
+	}
+
+	function onTargetInput() {
+		if (course.targetPct !== null && course.targetPct < 0) course.targetPct = 0;
+	}
+
+	function blockMinus(e: KeyboardEvent) {
+		if (e.key === '-') e.preventDefault();
+	}
+
+    function onIterationOrderChange(iterationId: string, newOrder: number) {
+        course.components = setIterationOrder(course.components, iterationId, newOrder);
+    }
+
+    $: weightSum = totalWeightage(course.components);
+    $: studentTotal = studentTotalPct(course.components);
+    $: classAvgTotal = course.mode === 'relative' ? classAvgTotalPct(course.components) : null;
 
 	// How much weightage is still "open" (not yet graded) — this is the pool
-	// the student still has a chance to earn marks on.
-	$: gradedWeight = totalWeightage(course.components.filter((c) => !c.isFuture));
-	$: remainingWeight = Math.max(0, 100 - gradedWeight);
-	// Average % the student needs across that remaining weightage to land on
-	// their target total: (target - current total) / remaining weight * 100.
+    // the student still has a chance to earn marks on.
+    $: gradedWeight = totalWeightage(course.components.filter((c) => !c.isFuture));
+    $: remainingWeight = Math.max(0, 100 - gradedWeight);
+
+    // Average % the student needs across that remaining weightage to land on
+    // their target total: (target - current total) / remaining weight * 100.
+    $: targetValue = course.targetPct || 0;
 	$: remainingAimValue =
-		remainingWeight > 0 ? ((course.targetPct - studentTotal) / remainingWeight) * 100 : null;
-	$: remainingAimDisplay = remainingAimValue === null ? '—' : `${remainingAimValue.toFixed(2)}%`;
-
-	// Chronological progress chart data: only graded (non-future) components,
-	// ordered by the student-set order dropdown.
-	$: orderedComponents = [...course.components]
-		.filter((c) => !c.isFuture)
-		.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-	$: chartLabels = orderedComponents.map((c) => c.type);
-	$: chartStudent = orderedComponents.map((c) => computeComponentScore(c, 'student').pctValue);
-	$: chartClassAvg =
-		course.mode === 'relative'
-			? orderedComponents.map((c) => computeComponentScore(c, 'classAvg').pctValue)
+		targetValue > 0 && remainingWeight > 0
+			? Math.max(0, ((targetValue - studentTotal) / remainingWeight) * 100)
 			: null;
+	$: remainingAimDisplay =
+		remainingAimValue === null
+			? '—'
+			: remainingAimValue === 0
+				? 'Reached'
+				: `${remainingAimValue.toFixed(2)}%`;
+        // Every individual mark from non-future components, in the student-chosen order.
+    $: orderedMarks = course.components
+        .filter((c) => !c.isFuture)
+        .flatMap((c) =>
+            c.iterations.map((it, i) => ({
+                order: it.order ?? Number.MAX_SAFE_INTEGER,
+                label: c.iterations.length > 1 ? attemptLabel(c.type, i + 1) : c.type,
+                student: pct(it.studentObtained, it.studentTotal),
+                classAvg: pct(it.classAvgObtained, it.classAvgTotal)
+            }))
+        )
+        .sort((a, b) => a.order - b.order);
 
+    $: orderOptions = orderedMarks.map((_, idx) => idx + 1);
+    $: chartLabels = orderedMarks.map((m) => m.label);
+    $: chartStudent = orderedMarks.map((m) => m.student);
+    $: chartClassAvg = course.mode === 'relative' ? orderedMarks.map((m) => m.classAvg) : null;
 </script>
 
 <div class="course-card">
-	<div class="course-header">
-		<input
-			class="course-name-input"
-			type="text"
-			placeholder="Course name (e.g. CSD101)"
-			bind:value={course.name}
-		/>
-		<button class="icon-btn" on:click={() => onRemove(course.id)} aria-label="Remove course">
-			&times;
-		</button>
-	</div>
+    <div class="course-header">
+        <input
+            class="course-name-input"
+            type="text"
+            placeholder="Course name (e.g. CSD101)"
+            bind:value={course.name}
+        />
+        <button class="icon-btn" on:click={() => onRemove(course.id)} aria-label="Remove course">
+            &times;
+        </button>
+    </div>
 
-	<div class="mode-toggle">
-		<span class="mode-label">Grading:</span>
-		<button
-			class="mode-btn"
-			class:active={course.mode === 'relative'}
-			on:click={() => (course.mode = 'relative')}
-		>
-			Relative
-		</button>
-		<button
-			class="mode-btn"
-			class:active={course.mode === 'absolute'}
-			on:click={() => (course.mode = 'absolute')}
-		>
-			Absolute
-		</button>
-	</div>
+    <div class="mode-toggle">
+        <span class="mode-label">Grading:</span>
+        <button
+            class="mode-btn"
+            class:active={course.mode === 'relative'}
+            on:click={() => (course.mode = 'relative')}
+        >
+            Relative
+        </button>
+        <button
+            class="mode-btn"
+            class:active={course.mode === 'absolute'}
+            on:click={() => (course.mode = 'absolute')}
+        >
+            Absolute
+        </button>
 
-	{#each course.components as comp (comp.id)}
+        <div class="target-field">
+            <span class="mode-label">Target:</span>
+            <input
+                type="number"
+                min="0"
+                max="100"
+                class="mini-input"
+				class:invalid={course.targetPct > 100}
+                bind:value={course.targetPct}
+                on:input={onTargetInput}
+                on:keydown={blockMinus}
+            />
+            <span class="slash">%</span>
+        </div>
+    </div>
+	{#if course.targetPct > 100}
+		<p class="field-error target-error">Target cannot be more than 100%</p>
+	{/if}
+</div>
+
+    {#each course.components as comp (comp.id)}
+        {@const weightErr = weightageError(comp.weightage)}
 		<div class="component-block">
-			<div class="comp-top">
-				<div class="comp-top-left">
-					<span class="field-label">Graded component</span>
-					<select class="select" bind:value={comp.type} on:change={() => onTypeChange(comp)}>
-						{#each COMPONENT_TYPES as t}
-							<option value={t}>{t}</option>
-						{/each}
-					</select>
-				</div>
+            <div class="comp-top">
+                <div class="comp-top-left">
+                    <span class="field-label">Graded component</span>
+                    <select class="select" bind:value={comp.type} on:change={() => onTypeChange(comp)}>
+                        {#each COMPONENT_TYPES as t}
+                            <option value={t}>{t}</option>
+                        {/each}
+                    </select>
+                </div>
 
-				<div class="weightage-field">
-					<span class="field-label">Weightage %</span>
-					<input type="number" min="0" max="100" class="mini-input" bind:value={comp.weightage} />
-				</div>
+                <div class="weightage-field">
+                    <span class="field-label">Weightage %</span>
+                    <input
+						type="number"
+						min="0"
+						max="100"
+						class="mini-input"
+						class:invalid={!!weightErr}
+						bind:value={comp.weightage}
+					/>
+                </div>
 
-				<label class="future-checkbox">
-					<input type="checkbox" bind:checked={comp.isFuture} />
-					Future component
-				</label>
+                <label class="future-checkbox">
+                    <input type="checkbox" bind:checked={comp.isFuture} on:change={onFutureChange} />
+                    Future component
+                </label>
 
-				<div class="order-field">
-					<span class="field-label">Order</span>
-					<select
-						class="select order-select"
-						value={comp.order}
-						on:change={(e) => onOrderChange(comp, Number(e.currentTarget.value))}
-					>
-						{#each course.components.map((_, idx) => idx + 1) as n}
-							<option value={n}>{n}</option>
-						{/each}
-					</select>
-				</div>
+                <!--
+                <div class="order-field">
+                    <span class="field-label">Order</span>
+                    <select
+                        class="select order-select"
+                        value={comp.order}
+                        on:change={(e) => onOrderChange(comp, Number(e.currentTarget.value))}
+                    >
+                        {#each course.components.map((_, idx) => idx + 1) as n}
+                            <option value={n}>{n}</option>
+                        {/each}
+                    </select>
+                </div>
+                -->
 
-				<button
-					class="icon-btn small"
-					on:click={() => removeComponent(comp.id)}
-					aria-label="Remove component"
-				>
-					&times;
-				</button>
-			</div>
+                <button
+                    class="icon-btn small"
+                    on:click={() => removeComponent(comp.id)}
+                    aria-label="Remove component"
+                >
+                    &times;
+                </button>
+            </div>
 
-			{#if !comp.isFuture}
-				{#if needsBestOf(comp.type)}
+			{#if weightErr}<p class="field-error">{weightErr}</p>{/if}
+            {#if !comp.isFuture}
+            	{#if needsBestOf(comp.type)}
+					{@const bestErr = bestOfError(comp.bestOfCount, comp.bestOfTotal)}
 					<div class="best-of-row">
 						<span class="field-label">best</span>
 						<input
 							type="number"
 							min="0"
 							class="mini-input"
+							class:invalid={bestErr?.field === 'count'}
 							bind:value={comp.bestOfCount}
 							on:input={() => onBestOfChange(comp)}
 						/>
@@ -173,96 +281,142 @@
 							type="number"
 							min="1"
 							class="mini-input"
+							class:invalid={bestErr?.field === 'total'}
 							bind:value={comp.bestOfTotal}
 							on:input={() => onBestOfChange(comp)}
 						/>
 					</div>
+					{#if bestErr}<p class="field-error best-error">{bestErr.msg}</p>{/if}
 				{/if}
 
-					<div class="marks-table" class:with-avg={course.mode === 'relative'}>
-						<div class="marks-header">
-							<span></span>
-							<span>Your marks</span>
-							{#if course.mode === 'relative'}
-								<span>Estimated class average</span>
-							{/if}
-						</div>
+                    <div class="marks-table" class:with-avg={course.mode === 'relative'}>
+                        <div class="marks-header">
+                            <span></span>
+                            <span>Your marks</span>
+                            {#if course.mode === 'relative'}
+                                <span>Estimated class average</span>
+                            {/if}
+                            <span>Order</span>
+                        </div>
 
-						{#each comp.iterations as it, i (it.id)}
+                        {#each comp.iterations as it, i (it.id)}
+							{@const studentErr = markError(it.studentObtained, it.studentTotal, 'Your marks')}
+							{@const avgErr =
+								course.mode === 'relative'
+									? markError(it.classAvgObtained, it.classAvgTotal, 'Class average', false)
+									: null}
 							<div class="marks-row">
 								<span class="marks-label">
 									{comp.iterations.length > 1 ? attemptLabel(comp.type, i + 1) : ''}
 								</span>
 
 								<div class="marks-input">
-									<input type="number" min="0" class="mini-input" bind:value={it.studentObtained} />
+									<input
+										type="number"
+										min="0"
+										class="mini-input"
+										class:invalid={studentErr?.field === 'obtained'}
+										bind:value={it.studentObtained}
+									/>
 									<span class="slash">/</span>
-									<input type="number" min="0" class="mini-input" bind:value={it.studentTotal} />
+									<input
+										type="number"
+										min="0"
+										class="mini-input"
+										class:invalid={studentErr?.field === 'total'}
+										bind:value={it.studentTotal}
+										on:input={() => (it.classAvgTotal = it.studentTotal)}
+									/>
 								</div>
 
 								{#if course.mode === 'relative'}
 									<div class="marks-input">
-										<input type="number" min="0" class="mini-input" bind:value={it.classAvgObtained} />
+										<input
+											type="number"
+											min="0"
+											class="mini-input"
+											class:invalid={avgErr?.field === 'obtained'}
+											bind:value={it.classAvgObtained}
+										/>
 										<span class="slash">/</span>
-										<input type="number" min="0" class="mini-input" bind:value={it.classAvgTotal} />
+										<input
+											type="number"
+											min="0"
+											class="mini-input"
+											class:invalid={studentErr?.field === 'total'}
+											bind:value={it.classAvgTotal}
+											on:input={() => (it.studentTotal = it.classAvgTotal)}
+										/>
 									</div>
 								{/if}
+
+								<select
+									class="select order-select"
+									value={it.order}
+									on:change={(e) => onIterationOrderChange(it.id, Number(e.currentTarget.value))}
+								>
+									{#each orderOptions as n}
+										<option value={n}>{n}</option>
+									{/each}
+								</select>
 							</div>
+							{#if studentErr}<p class="field-error marks-error">{studentErr.msg}</p>{/if}
+							{#if avgErr}<p class="field-error marks-error">{avgErr.msg}</p>{/if}
 						{/each}
-					</div>
-			{:else}
-				<p class="future-note">Future component — nothing to track yet.</p>
-			{/if}
-		</div>
-	{/each}
+                    </div>
+            {:else}
+                <p class="future-note">Future component — nothing to track yet.</p>
+            {/if}
+        </div>
+    {/each}
 
-	<button class="add-btn" on:click={addComponent}>+ Add graded component</button>
+    <button class="add-btn" on:click={addComponent}>+ Add graded component</button>
 
-	{#if weightSum !== 100 && course.components.length > 0}
+    {#if weightSum > 100}
+		<p class="weight-warning over">Weightage adds up to {weightSum}%, which is more than 100%</p>
+	{:else if weightSum !== 100 && course.components.length > 0}
 		<p class="weight-warning">Weightage adds up to {weightSum}% (should total 100%)</p>
 	{/if}
 
-	<div class="totals">
-		<div class="total-box">
-			<span class="total-label">Total</span>
-			<span class="total-value student">{studentTotal.toFixed(2)}%</span>
-		</div>
-			<div class="total-box target-box">
-			<span class="total-label">Target</span>
-			<span
-				class="remaining-aim"
-				title="Average % needed on your remaining {remainingWeight.toFixed(0)}% weightage to hit your target"
-			>
-				{remainingAimDisplay}
-			</span>
-			<div class="total-aim-row">
-				<span class="total-aim-label">Total aim</span>
-				<div class="target-input-wrap">
-					<input
-						type="number"
-						min="0"
-						max="100"
-						class="target-input"
-						bind:value={course.targetPct}
-					/>
-					<span class="target-suffix">%</span>
-				</div>
-			</div>
-		</div>
-		{#if course.mode === 'relative' && classAvgTotal !== null}
-			<div class="total-box">
-				<span class="total-label">Estimated class average total</span>
-				<span class="total-value class-avg">{classAvgTotal.toFixed(2)}%</span>
-			</div>
-		{/if}
-	</div>
+    <div class="totals">
+        <div class="total-box">
+            <span class="total-label">Total</span>
+            <span class="total-value student">{studentTotal.toFixed(2)}%</span>
+        </div>
+            <div class="total-box target-box">
+            <span class="total-label">Target</span>
+            <span
+                class="remaining-aim"
+                title="Average % needed on your remaining {remainingWeight.toFixed(0)}% weightage to hit your target"
+            >
+                {remainingAimDisplay}
+            </span>
+            <div class="total-aim-row">
+                <span class="total-aim-label">Total aim: {course.targetPct || 0}%</span>
+                <div class="target-input-wrap">
+                    <input
+                        type="number"
+                        min="0"
+                        max="100"
+                        class="target-input"
+                        bind:value={course.targetPct}
+                    />
+                    <span class="target-suffix">%</span>
+                </div>
+            </div>
+        </div>
+        {#if course.mode === 'relative' && classAvgTotal !== null}
+            <div class="total-box">
+                <span class="total-label">Estimated class average total</span>
+                <span class="total-value class-avg">{classAvgTotal.toFixed(2)}%</span>
+            </div>
+        {/if}
+    </div>
 
-	<div class="progress-section">
-		<h3 class="progress-title">Progress chart</h3>
-		<ProgressChart labels={chartLabels} studentValues={chartStudent} classAvgValues={chartClassAvg} />
-	</div>
-
-</div>
+    <div class="progress-section">
+        <h3 class="progress-title">Progress chart</h3>
+        <ProgressChart labels={chartLabels} studentValues={chartStudent} classAvgValues={chartClassAvg} />
+    </div>
 
 <style>
 	.course-card {
@@ -326,7 +480,7 @@
 	.mode-label {
 		font-family: var(--font-mono, monospace);
 		font-size: 0.75rem;
-		color: var(--text-secondary, #9ca3af);
+		color: #f5f5f5;
 	}
 	.mode-btn {
 		background: var(--bg-input, #171717);
@@ -373,13 +527,13 @@
 		gap: 0.35rem;
 	}
 
-	.order-field {
+	/* .order-field {
 		display: flex;
 		flex-direction: column;
 		gap: 0.35rem;
-	}
+	} */
 
-	.order-select {
+	.select.order-select {
 		min-width: 64px;
 		width: 64px;
 		padding: 0.55rem 0.5rem;
@@ -389,7 +543,7 @@
 		font-family: var(--font-mono, monospace);
 		font-size: 0.72rem;
 		letter-spacing: 0.03em;
-		color: var(--text-muted, #9ca3af);
+		color: #f5f5f5;
 	}
 
 	.select {
@@ -447,7 +601,28 @@
 		font-family: inherit;
 	}
 
-	.note {
+		.mini-input.invalid,
+	.mini-input.invalid:focus {
+		border-color: #ef4444;
+	}
+
+	.field-error {
+		color: #f87171;
+		font-size: 0.78rem;
+		margin: 0.1rem 0 0.4rem;
+	}
+	.marks-error {
+		padding-left: calc(110px + 1.25rem);
+		margin: -0.15rem 0 0.2rem;
+	}
+	.best-error {
+		margin: -0.45rem 0 0.85rem;
+	}
+	.target-error {
+		margin: -1rem 0 1.25rem;
+	}
+
+	/* .note {
 		color: #fbbf24;
 		font-size: 0.8rem;
 		background: #1a1608;
@@ -455,7 +630,7 @@
 		border-radius: 8px;
 		padding: 0.55rem 0.8rem;
 		margin: 0;
-	}
+	} */
 
 	.future-note {
 		color: var(--text-muted, #6b7280);
@@ -472,26 +647,26 @@
 
 	.marks-header {
 		display: grid;
-		grid-template-columns: 110px 1fr;
+		grid-template-columns: 110px 1fr 64px;
 		gap: 1.25rem;
 		font-family: var(--font-mono, monospace);
 		font-size: 0.7rem;
 		letter-spacing: 0.03em;
-		color: var(--text-muted, #9ca3af);
+		color: #f5f5f5;
 		padding: 0 0.1rem;
 	}
 	.marks-table.with-avg .marks-header {
-		grid-template-columns: 110px 1fr 1fr;
+		grid-template-columns: 110px 1fr 1fr 64px;
 	}
 
 	.marks-row {
 		display: grid;
-		grid-template-columns: 110px 1fr;
+		grid-template-columns: 110px 1fr 64px;
 		gap: 1.25rem;
 		align-items: center;
 	}
 	.marks-table.with-avg .marks-row {
-		grid-template-columns: 110px 1fr 1fr;
+		grid-template-columns: 110px 1fr 1fr 64px;
 	}
 
 	.marks-label {
@@ -529,6 +704,11 @@
 		color: #f5f5f5;
 		font-size: 0.8rem;
 		margin: -0.4rem 0 1rem;
+		padding: 0 1.1rem;
+	}
+
+	.weight-warning.over {
+		color: #f87171;
 	}
 
 	.totals {
@@ -550,7 +730,7 @@
 	.total-label {
 		font-family: var(--font-mono, monospace);
 		font-size: 0.7rem;
-		color: var(--text-muted, #fbfcfc);
+		color: #f5f5f5;
 		letter-spacing: 0.03em;
 	}
 	.total-value {
@@ -571,23 +751,23 @@
 		font-weight: 700;
 		color: #f5f5f5;
 	}
-	.total-aim-row {
+	/* .total-aim-row {
 		display: flex;
 		align-items: baseline;
 		gap: 0.35rem;
 		margin-top: 0.15rem;
-	}
+	} */
 	.total-aim-label {
 		font-family: var(--font-mono, monospace);
 		font-size: 0.68rem;
-		color: var(--text-muted, #9ca3af);
+		color: #f5f5f5;
 	}
-	.target-input-wrap {
+	/* .target-input-wrap {
 		display: flex;
 		align-items: baseline;
 		gap: 0.2rem;
-	}
-	.target-input {
+	} */
+	/* .target-input {
 		background: transparent;
 		border: none;
 		border-bottom: 1px dashed var(--border, #2e2e2e);
@@ -601,16 +781,22 @@
 	.target-input:focus {
 		outline: none;
 		border-bottom-color: var(--border-hover, #525252);
-	}
-	.target-suffix {
+	} */
+	/* .target-suffix {
 		font-size: 0.85rem;
 		font-weight: 600;
 		color: var(--text-secondary, #d1d5db);
+	} */
+	.target-field {
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+		margin-left: auto;
 	}
 
 	.progress-section {
 		border-top: 1px solid var(--border, #262626);
-		padding-top: 1.25rem;
+		padding: 1.25rem 1.1rem 0;
 		margin-top: 0.25rem;
 	}
 	.progress-title {
@@ -679,6 +865,12 @@
 			min-width: 0;
 			width: 100%;
 			box-sizing: border-box;
+		}
+		.target-field{
+			margin-left: 0;
+		}
+		.marks-error {
+			padding-left: 0;
 		}
 	}
 </style>

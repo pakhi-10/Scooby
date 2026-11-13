@@ -36,7 +36,7 @@ export const BEST_OF_TYPES: ComponentType[] = [
 ];
 
 export function needsBestOf(type: ComponentType): boolean {
-	return BEST_OF_TYPES.includes(type);
+	return true;
 }
 
 export interface MarksIteration {
@@ -45,6 +45,7 @@ export interface MarksIteration {
 	studentTotal: number;
 	classAvgObtained: number;
 	classAvgTotal: number;
+	order?: number;
 }
 
 export interface GradedComponent {
@@ -173,5 +174,68 @@ export function setComponentOrder(
 		if (c.id === id) return { ...c, order: newOrder };
 		if (c.order === newOrder) return { ...c, order: oldOrder };
 		return c;
+	});
+}
+
+/**
+ * Gives every mark entry in non-future components a clean 1..N order.
+ * - Entries with no order yet (newly added, or saved before this feature) go to the end,
+ *   except when nothing has an order at all (old saved data), in which case the old
+ *   component-level order is used as the starting point.
+ * - Entries in future components have their order cleared, so they land at the end
+ *   once the component is no longer future.
+ */
+export function normalizeIterationOrders(components: GradedComponent[]): GradedComponent[] {
+	const anyOrdered = components.some(
+		(c) => !c.isFuture && c.iterations.some((it) => typeof it.order === 'number')
+	);
+
+	const entries: { iterId: string; key: number; seq: number }[] = [];
+	components.forEach((c, ci) => {
+		if (c.isFuture) return;
+		c.iterations.forEach((it, ii) => {
+			const key =
+				typeof it.order === 'number'
+					? it.order
+					: anyOrdered
+						? Number.MAX_SAFE_INTEGER
+						: (c.order ?? ci + 1) * 1000 + ii;
+			entries.push({ iterId: it.id, key, seq: entries.length });
+		});
+	});
+
+	entries.sort((a, b) => a.key - b.key || a.seq - b.seq);
+	const position = new Map(entries.map((e, i) => [e.iterId, i + 1]));
+
+	return components.map((c) => ({
+		...c,
+		iterations: c.iterations.map((it) => ({ ...it, order: position.get(it.id) }))
+	}));
+}
+
+/** Sets one mark entry's order, swapping with whichever entry held that slot. */
+export function setIterationOrder(
+	components: GradedComponent[],
+	iterationId: string,
+	newOrder: number
+): GradedComponent[] {
+	let oldOrder: number | undefined;
+	for (const c of components) {
+		if (c.isFuture) continue;
+		const it = c.iterations.find((i) => i.id === iterationId);
+		if (it) oldOrder = it.order;
+	}
+	if (oldOrder === undefined || oldOrder === newOrder) return components;
+
+	return components.map((c) => {
+		if (c.isFuture) return c;
+		return {
+			...c,
+			iterations: c.iterations.map((it) => {
+				if (it.id === iterationId) return { ...it, order: newOrder };
+				if (it.order === newOrder) return { ...it, order: oldOrder };
+				return it;
+			})
+		};
 	});
 }
